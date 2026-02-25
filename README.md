@@ -12,29 +12,26 @@ The project demonstrates:
 
 - 🌲 Random Forest Regression to predict house prices (in dollars)
 - 📊 Model evaluation using R² and MSE
-- 🖥️ Interactive Streamlit web app
-- 🚀 Deployment-ready ML application
+- 🖥️ Interactive Streamlit web application
+- 🚀 Deployment-ready ML project
 
 ---
 
 ## 📂 Project Structure
 
 ```
-├── app.py                         # Streamlit application
-├── model.pkl    # Trained model
-├── Prediction.ipynb       # Model training notebook
-├── README.md                      # Project documentation
+├── app.py                   # Streamlit application
+├── model.pkl                # Trained Random Forest model
+├── Prediction.ipynb         # Model training notebook
+├── README.md                # Project documentation
 ```
-
----
 
 ---
 
 ## 📊 Dataset
 
 **California Housing Dataset**  
-Source: `sklearn.datasets.fetch_california_housing`
-
+Source: `sklearn.datasets.fetch_california_housing`  
 Based on 1990 California Census data.
 
 ---
@@ -56,24 +53,26 @@ Based on 1990 California Census data.
 |----------|----------------------------------|
 | PRICE    | Median house value in US dollars |
 
-Target scaling:
+### Target Scaling
 
 ```python
 df["PRICE"] = housing.target * 100000
-🧠 Model Used
+```
 
+---
 
-🌲 Random Forest Regressor
+## 🧠 Model Used
 
-Why Random Forest?
+### 🌲 Random Forest Regressor
 
-Handles non-linear relationships
+### Why Random Forest?
 
-More robust than Linear Regression
+- Handles non-linear relationships
+- More robust than Linear Regression
+- Reduces overfitting via ensemble learning
+- Performs well on structured/tabular data
 
-Reduces overfitting via ensemble learning
-
-Performs well on structured/tabular data
+---
 
 ## ⚙️ Data Preprocessing
 
@@ -88,14 +87,14 @@ Performs well on structured/tabular data
 
 ## 📈 Model Evaluation
 
-Evaluation Metrics:
+### Evaluation Metrics
 
-R² Score
+- **R² Score**
+- **Mean Squared Error (MSE)**
 
-Mean Squared Error (MSE)
+Random Forest improves prediction performance compared to simple linear models by capturing complex feature interactions.
 
-Random Forest improves prediction performance compared to simple linear models due to capturing feature interactions.
-
+---
 
 ## 🖥️ Streamlit Web Application
 
@@ -104,16 +103,22 @@ Random Forest improves prediction performance compared to simple linear models d
 - User-friendly interface
 - Median Income entered in **real dollars**
 - Automatic conversion to dataset scale
+- Real-time prediction output
+
+### Example Scaling in App
 
 ```python
 user_income = st.number_input("Median Income ($)", value=60000)
 medinc = user_income / 10000
 ```
 
-- Outputs:
-  - 🏠 Predicted house price
+### Output
 
-### ▶️ Run the App
+- 🏠 Predicted house price (USD)
+
+---
+
+## ▶️ Run the Application
 
 ```bash
 streamlit run app.py
@@ -124,32 +129,29 @@ streamlit run app.py
 ## 🛠️ Installation & Requirements
 
 ```bash
-pip install numpy pandas matplotlib seaborn scikit-learn streamlit
+pip install numpy pandas scikit-learn streamlit
 ```
 
 ---
 
 ## ✅ Results & Insights
 
-Median Income is the most influential feature
-
-Random Forest provides strong predictive performance
-
-Model generalizes well with proper hyperparameter tuning
+- Median Income is the most influential feature
+- Random Forest provides strong predictive performance
+- Model generalizes well with proper hyperparameter tuning
 
 ---
 
 ## 🚀 Future Improvements
 
-
-Add Latitude & Longitude features
-
-Add feature importance visualization
-
-SHAP explainability integration
-
-Try XGBoost or LightGBM
-
-Docker containerization for deployment
+- Add Latitude & Longitude features
+- Add feature importance visualization in Streamlit
+- SHAP explainability integration
+- Try XGBoost or LightGBM
+- Docker containerization for deployment
 
 ---
+
+## 📜 License
+
+This project is for educational and demonstration purposes.
