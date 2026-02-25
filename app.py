@@ -10,18 +10,16 @@ st.set_page_config(
 )
 
 st.title("🏡 California Housing Price Predictor")
-st.write("Linear Regression & Logistic Regression Models")
+st.write("Random Forest Model")
 
-# Load models
+# Load model
 @st.cache_resource
-def load_models():
-    with open("linear_regression_model.pkl", "rb") as f:
-        linear_model = pickle.load(f)
-    with open("logistic_regression_model.pkl", "rb") as f:
-        logistic_model = pickle.load(f)
-    return linear_model, logistic_model
+def load_model():
+    with open("model.pkl", "rb") as f:
+        model = pickle.load(f)
+    return model
 
-linear_model, logistic_model = load_models()
+model = load_model()
 
 st.subheader("Enter House Details")
 
@@ -37,11 +35,11 @@ user_income = st.number_input(
 # Convert to dataset scale
 medinc = user_income / 10000
 
-houseage = st.number_input("House Age", min_value=0.0, value=20.0,step=1.0)
-averooms = st.number_input("Average Rooms", min_value=0.0, value=5.0,step=1.0)
-avebedrms = st.number_input("Average Bedrooms", min_value=0.0, value=1.0,step=1.0)
+houseage = st.number_input("House Age", min_value=0.0, value=20.0, step=1.0)
+averooms = st.number_input("Average Rooms", min_value=0.0, value=5.0, step=1.0)
+avebedrms = st.number_input("Average Bedrooms", min_value=0.0, value=1.0, step=1.0)
 
-# Input dataframe 
+# Input dataframe
 input_data = pd.DataFrame({
     "MedInc": [medinc],
     "HouseAge": [houseage],
@@ -54,14 +52,7 @@ st.write(input_data)
 
 # Prediction
 if st.button("Predict"):
-    price_pred = linear_model.predict(input_data)[0]
-    class_pred = logistic_model.predict(input_data)[0]
-    prob_pred = logistic_model.predict_proba(input_data)[0][1]
+    prediction = model.predict(input_data)[0]
 
     st.subheader("Results")
-    st.success(f"🏠 Predicted House Price: ${price_pred:,.0f}")
-
-    if class_pred == 1:
-        st.info(f"📈 Price Category: HIGH ({prob_pred:.2%} confidence)")
-    else:
-        st.info(f"📉 Price Category: LOW ({1 - prob_pred:.2%} confidence)")
+    st.success(f"🏠 Predicted House Price: ${prediction:,.0f}")
