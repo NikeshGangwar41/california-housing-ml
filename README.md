@@ -1,7 +1,8 @@
-# 🏡 California Housing Price Prediction
+# 🏡 California Housing Price Prediction (Random Forest)
 
-This project builds a **machine learning application** to predict **California house prices** using the **California Housing Dataset**.  
-It includes both **regression** and **classification** models along with a **Streamlit web interface**.
+This project builds a **Machine Learning web application** to predict **California house prices** using the **California Housing Dataset**.
+
+The final deployed model uses a **Random Forest Regressor** and is served through a **Streamlit web interface**.
 
 ---
 
@@ -9,9 +10,10 @@ It includes both **regression** and **classification** models along with a **Str
 
 The project demonstrates:
 
-- 📈 **Linear Regression** to predict house prices (in dollars)
-- 📊 **Logistic Regression** to classify houses as **High Price** or **Low Price**
-- 🖥️ **Streamlit App** for interactive user input and predictions
+- 🌲 Random Forest Regression to predict house prices (in dollars)
+- 📊 Model evaluation using R² and MSE
+- 🖥️ Interactive Streamlit web app
+- 🚀 Deployment-ready ML application
 
 ---
 
@@ -19,59 +21,59 @@ The project demonstrates:
 
 ```
 ├── app.py                         # Streamlit application
-├── linear_regression_model.pkl    # Trained Linear Regression model
-├── logistic_regression_model.pkl  # Trained Logistic Regression model
-├── california_housing.ipynb       # Model training notebook
+├── model.pkl    # Trained model
+├── Prediction.ipynb       # Model training notebook
 ├── README.md                      # Project documentation
 ```
+
+---
 
 ---
 
 ## 📊 Dataset
 
 **California Housing Dataset**  
-Source: 1990 California Census (`sklearn.datasets.fetch_california_housing`)
+Source: `sklearn.datasets.fetch_california_housing`
+
+Based on 1990 California Census data.
+
+---
 
 ### 🔹 Features Used
 
-| Feature   | Description                                     |
-| --------- | ----------------------------------------------- |
+| Feature   | Description                                      |
+|-----------|--------------------------------------------------|
 | MedInc    | Median income (in tens of thousands of dollars) |
 | HouseAge  | Median age of houses                            |
 | AveRooms  | Average number of rooms per household           |
 | AveBedrms | Average number of bedrooms per household        |
 
+---
+
 ### 🎯 Target Variable
 
-| Variable | Description                          |
-| -------- | ------------------------------------ |
-| PRICE    | Median house value in **US dollars** |
+| Variable | Description                      |
+|----------|----------------------------------|
+| PRICE    | Median house value in US dollars |
+
+Target scaling:
 
 ```python
 df["PRICE"] = housing.target * 100000
-```
+🧠 Model Used
 
----
 
-## 🧠 Models Used
+🌲 Random Forest Regressor
 
-### 1️⃣ Linear Regression
+Why Random Forest?
 
-- Predicts **house prices in dollars**
-- Evaluation Metrics:
-  - Mean Squared Error (MSE)
-  - R² Score
+Handles non-linear relationships
 
-### 2️⃣ Logistic Regression
+More robust than Linear Regression
 
-- Binary classification:
-  - `1` → High Price
-  - `0` → Low Price
-- Threshold: Median house price
-- Evaluation Metric:
-  - Accuracy Score
+Reduces overfitting via ensemble learning
 
----
+Performs well on structured/tabular data
 
 ## ⚙️ Data Preprocessing
 
@@ -86,17 +88,14 @@ df["PRICE"] = housing.target * 100000
 
 ## 📈 Model Evaluation
 
-### Linear Regression
+Evaluation Metrics:
 
-- Scatter plot: **Actual vs Predicted Prices**
-- Perfect prediction reference line (y = x)
+R² Score
 
-### Logistic Regression
+Mean Squared Error (MSE)
 
-- Confusion matrix visualization
-- Accuracy score
+Random Forest improves prediction performance compared to simple linear models due to capturing feature interactions.
 
----
 
 ## 🖥️ Streamlit Web Application
 
@@ -113,7 +112,6 @@ medinc = user_income / 10000
 
 - Outputs:
   - 🏠 Predicted house price
-  - 📈 Price category (High / Low)
 
 ### ▶️ Run the App
 
@@ -133,17 +131,25 @@ pip install numpy pandas matplotlib seaborn scikit-learn streamlit
 
 ## ✅ Results & Insights
 
-- **Median Income** is the most influential feature
-- Linear Regression provides reasonable price predictions
-- Logistic Regression effectively classifies high vs low price houses
+Median Income is the most influential feature
+
+Random Forest provides strong predictive performance
+
+Model generalizes well with proper hyperparameter tuning
 
 ---
 
 ## 🚀 Future Improvements
 
-- Add geographic features (Latitude, Longitude)
-- Hyperparameter tuning
-- SHAP feature importance analysis
-- Try advanced models (Random Forest, XGBoost)
+
+Add Latitude & Longitude features
+
+Add feature importance visualization
+
+SHAP explainability integration
+
+Try XGBoost or LightGBM
+
+Docker containerization for deployment
 
 ---
